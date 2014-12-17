@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    
+    <title>The subset interface</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="top" title="parabam 0.1 documentation" href="index.html" />
+    <link rel="next" title="The stat Interface" href="Stat.html" />
+    <link rel="prev" title="Fundamentals of parabam" href="Fundamentals.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Stat.html" title="The stat Interface"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Fundamentals.html" title="Fundamentals of parabam"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">parabam 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="the-subset-interface">
+<h1>The <cite>subset</cite> interface</h1>
+<div class="section" id="what-is-the-subset-interface-for">
+<h2>What is the subset interface for?</h2>
+</div>
+<div class="section" id="producing-a-single-subset">
+<h2>Producing a single subset</h2>
+<div class="section" id="from-the-command-line">
+<h3>From the command line</h3>
+<p>Here is an engine written for the subset operation which very simply checks if a read is unmapped. If the read is unmapped we return True to include it in our subset</p>
+</div>
+<div class="section" id="programatically">
+<h3>Programatically</h3>
+</div>
+</div>
+<div class="section" id="producing-multiple-subset">
+<h2>Producing multiple subset</h2>
+<div class="section" id="id1">
+<h3>From the command line</h3>
+</div>
+<div class="section" id="id2">
+<h3>Programatically</h3>
+</div>
+</div>
+<div class="section" id="subset-specification">
+<h2>Subset Specification</h2>
+<p>Below is the parabam subset specification</p>
+<span class="target" id="module-parabam.interface.subset"></span><dl class="class">
+<dt id="parabam.interface.subset.Interface">
+<em class="property">class </em><tt class="descclassname">parabam.interface.subset.</tt><tt class="descname">Interface</tt><big>(</big><em>temp_dir</em>, <em>exe_dir</em><big>)</big><a class="reference internal" href="_modules/parabam/interface/subset.html#Interface"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>The interface to parabam subset.
+Users will primarily make use of the <tt class="docutils literal"><span class="pre">run</span></tt> function.</p>
+<dl class="method">
+<dt id="parabam.interface.subset.Interface.run_cmd">
+<tt class="descname">run_cmd</tt><big>(</big><em>parser</em><big>)</big><a class="reference internal" href="_modules/parabam/interface/subset.html#Interface.run_cmd"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>This function is not intended to be run by users and is utilised by the parabam
+command line interface.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Stat.html" title="The stat Interface"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Fundamentals.html" title="Fundamentals of parabam"
+             >previous</a> |</li>
+        <li><a href="index.html">parabam 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Henry Farmery.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

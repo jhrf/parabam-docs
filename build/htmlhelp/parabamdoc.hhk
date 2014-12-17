@@ -1,0 +1,306 @@
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="__enter__() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.__enter__">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="__exit__() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.__exit__">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="__hash__ (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.__hash__">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="__iter__ (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.__iter__">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="__next__() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.__next__">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="__str__ (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.__str__">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="AlignedSegment (class in pysam)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="AlignmentFile (class in pysam)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="bin (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.bin">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="cigarstring (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.cigarstring">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="cigartuples (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.cigartuples">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="close() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.close">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="compare() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.compare">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="count() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.count">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="fetch() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.fetch">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="filename (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.filename">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="flag (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.flag">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="get_aligned_pairs() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.get_aligned_pairs">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="get_blocks() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.get_blocks">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="get_overlap() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.get_overlap">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="get_reference_positions() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.get_reference_positions">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="getrname() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.getrname">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="gettid() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.gettid">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="head() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.head">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="header (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.header">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="infer_query_length() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.infer_query_length">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="Interface (class in parabam.interface.subset)">
+    <param name="Local" value="Subset.html#parabam.interface.subset.Interface">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_duplicate (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_duplicate">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_paired (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_paired">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_proper_pair (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_proper_pair">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_qcfail (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_qcfail">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_read1 (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_read1">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_read2 (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_read2">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_reverse (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_reverse">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_secondary (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_secondary">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="is_unmapped (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.is_unmapped">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="lengths (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.lengths">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="mapped (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.mapped">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="mapping_quality (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.mapping_quality">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="mate() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.mate">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="mate_is_reverse (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.mate_is_reverse">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="mate_is_unmapped (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.mate_is_unmapped">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="next (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.next">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="next_reference_id (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.next_reference_id">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="next_reference_start (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.next_reference_start">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="nocoordinate (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.nocoordinate">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="nreferences (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.nreferences">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="opt() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.opt">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="overlap() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.overlap">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="parabam.interface.subset (module)">
+    <param name="Local" value="Subset.html#module-parabam.interface.subset">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="pileup() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.pileup">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_aligment_length (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_aligment_length">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_alignment_end (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_alignment_end">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_alignment_length (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_alignment_length">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_alignment_qualities (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_alignment_qualities">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_alignment_sequence (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_alignment_sequence">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_alignment_start (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_alignment_start">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_length (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_length">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_name (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_name">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_qualities (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_qualities">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="query_sequence (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.query_sequence">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="reference_end (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.reference_end">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="reference_id (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.reference_id">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="reference_length (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.reference_length">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="reference_start (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.reference_start">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="references (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.references">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="reset() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.reset">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="run_cmd() (parabam.interface.subset.Interface method)">
+    <param name="Local" value="Subset.html#parabam.interface.subset.Interface.run_cmd">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="seek() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.seek">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="setTag() (pysam.AlignedSegment method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.setTag">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="tags (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.tags">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="tell() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.tell">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="template_length (pysam.AlignedSegment attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignedSegment.template_length">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="text (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.text">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="unmapped (pysam.AlignmentFile attribute)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.unmapped">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Keyword" value="write() (pysam.AlignmentFile method)">
+    <param name="Local" value="Fundamentals.html#pysam.AlignmentFile.write">
+</OBJECT>
+</UL>

@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The subset interface &mdash; parabam 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="parabam 0.1 documentation" href="index.html" />
+    <link rel="next" title="Examples subset" href="Subset_example.html" />
+    <link rel="prev" title="Fundamentals of parabam" href="Fundamentals.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Subset_example.html" title="Examples subset"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Fundamentals.html" title="Fundamentals of parabam"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">parabam 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-subset-interface">
+<h1>The <cite>subset</cite> interface<a class="headerlink" href="#the-subset-interface" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-the-subset-interface-for">
+<h2>What is the subset interface for?<a class="headerlink" href="#what-is-the-subset-interface-for" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>subset</cite> operation allows the user to create BAMs containing a specific subset of reads from within a given BAM file. For example, a subset BAM containing all of the unmapped reads in the file, or all the read which contain a certain sequence.</p>
+<p>In this chapter we detail the process you must follow in order to run the subset operation.</p>
+</div>
+<div class="section" id="producing-a-single-subset">
+<h2>Producing a single subset<a class="headerlink" href="#producing-a-single-subset" title="Permalink to this headline">¶</a></h2>
+<p>With parabam it easy to create BAM files containing a subset of reads from a larger BAM file. In this section we will explore how to create a single subset with parabam. With single subsets there is only one criterion by which reads are stored. This makes for simple code, but if you want to create multiple subset you should read the section detailing <em class="xref std std-ref">multiple subsets</em>.</p>
+<div class="section" id="from-the-command-line">
+<h3>From the command line<a class="headerlink" href="#from-the-command-line" title="Permalink to this headline">¶</a></h3>
+<p>Here is a run though illustrating how we would create a parabam run that collects unmapped reads from a file.</p>
+<p>In order to use the subset interface from the command line we first navigate to a directory where we will conduct our analysis.</p>
+<div class="highlight-shell"><div class="highlight"><pre><span class="nb">cd</span> /analysis/parabam
+</pre></div>
+</div>
+<p>We then make a new file which will contain the code which parabam will use to analyse the BAM file. Let&#8217;s make our instructions file:</p>
+<div class="highlight-shell"><div class="highlight"><pre>touch get_unmapped_reads.py
+</pre></div>
+</div>
+<p>Now we edit the file we just created - <em>get_unmapped_reads.py</em> - to include the following code.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">engine</span><span class="p">(</span><span class="n">read</span><span class="p">,</span><span class="n">constants</span><span class="p">,</span><span class="n">master</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">read</span><span class="o">.</span><span class="n">is_unmapped</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</pre></div>
+</div>
+<p>By returning true we tell parabam to store the read in its subset.</p>
+<p>We would then invoke this instruction from the command line as follows:</p>
+<div class="highlight-shell"><div class="highlight"><pre>parabam subset -p16 -c50000 -i get_unmapped_reads -b /path/to/bam/file_name.bam -o unmapped_reads
+</pre></div>
+</div>
+<p>This will create a file called unmapped_reads.bam with all the unmapped reads from our BAM file.</p>
+<p>Notice that we include the arguments <tt class="docutils literal"><span class="pre">-p</span></tt> and <tt class="docutils literal"><span class="pre">-c</span></tt>. These options tell parabam how many processors to use and how many reads to hold in memory at any one time. The more processes you allow parabam to run, the quicker it can run on all the reads in a file. However, you should not specify more processes than your computer has processors. This will cause your computer to slow down. Additionally, the more reads that you allow parabam to store in memory, the faster it will run. But beware. Specifing too many reads will make your computer run out of memory and become unresponsive.</p>
+<p>If you need to know what any of the arguments to the subset operation are just type the following to view the help text:</p>
+<div class="highlight-shell"><div class="highlight"><pre>parabam subset -h
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="producing-multiple-subsets">
+<h2>Producing multiple subsets<a class="headerlink" href="#producing-multiple-subsets" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes we may wish to store multiple subsets from the same BAM file. We can do this both on the command line or by invoking parabam programatically via python.</p>
+<div class="section" id="id1">
+<h3>From the command line<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>This example will create two subsets. One subset of reads which are deemd secondary aligments and one subset which failed QC. We will make use of calls to variables defined in pysam.AlignedSegment. The full documentation for this class is listed in <a class="reference internal" href="Fundamentals.html"><em>Fundamentals</em></a>.</p>
+<p>First, we navigate to a directory where we can carry out the analysis and create an instructions file:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span class="nb">cd</span> /analysis/parabam
+touch multiple_subsets.py
+</pre></div>
+</div>
+<p>We then need to write the code that allows us to create the subsets. It&#8217;s more involved than the single subset example above. We should edit the file multiple_subsets.py to contain the following code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_subset_types</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s">&quot;failed_qc&quot;</span><span class="p">,</span><span class="s">&quot;secondary_aligments&quot;</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">engine</span><span class="p">(</span><span class="n">read</span><span class="p">,</span><span class="n">constants</span><span class="p">,</span><span class="n">master</span><span class="p">):</span>
+        <span class="n">belongs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">read</span><span class="o">.</span><span class="n">is_qcfail</span><span class="p">:</span>
+                <span class="n">belongs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;failed_qc&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">read</span><span class="o">.</span><span class="n">is_secondary</span><span class="p">:</span>
+                <span class="n">belongs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;failed_qc&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">belongs</span>
+</pre></div>
+</div>
+<p>The above code block sees us introduce the function &#8220;get_subset_types&#8221;. Notice how first we define the subset groups as a list of strings. These strings can be anything you want, but it make sense to label them appropriately.</p>
+<p>Then, in the engine we return a list of subsets to which the read belongs. For example, if a read returns True for both <tt class="docutils literal"><span class="pre">is_qcfail</span></tt> and <tt class="docutils literal"><span class="pre">is_secondary</span></tt> it will be added to both files.</p>
+</div>
+<div class="section" id="programatically">
+<h3>Programatically<a class="headerlink" href="#programatically" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="subset-specification">
+<h2>Subset Specification<a class="headerlink" href="#subset-specification" title="Permalink to this headline">¶</a></h2>
+<p>Below is the parabam subset specification</p>
+<span class="target" id="module-parabam.interface.subset"></span><dl class="class">
+<dt id="parabam.interface.subset.Interface">
+<em class="property">class </em><tt class="descclassname">parabam.interface.subset.</tt><tt class="descname">Interface</tt><big>(</big><em>temp_dir</em>, <em>exe_dir</em><big>)</big><a class="reference internal" href="_modules/parabam/interface/subset.html#Interface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#parabam.interface.subset.Interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>The interface to parabam subset.
+Users will primarily make use of the <tt class="docutils literal"><span class="pre">run</span></tt> function.</p>
+<dl class="method">
+<dt id="parabam.interface.subset.Interface.run_cmd">
+<tt class="descname">run_cmd</tt><big>(</big><em>parser</em><big>)</big><a class="reference internal" href="_modules/parabam/interface/subset.html#Interface.run_cmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#parabam.interface.subset.Interface.run_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is not intended to be run by users and is utilised by the parabam
+command line interface.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <cite>subset</cite> interface</a><ul>
+<li><a class="reference internal" href="#what-is-the-subset-interface-for">What is the subset interface for?</a></li>
+<li><a class="reference internal" href="#producing-a-single-subset">Producing a single subset</a><ul>
+<li><a class="reference internal" href="#from-the-command-line">From the command line</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#producing-multiple-subsets">Producing multiple subsets</a><ul>
+<li><a class="reference internal" href="#id1">From the command line</a></li>
+<li><a class="reference internal" href="#programatically">Programatically</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#subset-specification">Subset Specification</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Fundamentals.html"
+                        title="previous chapter">Fundamentals of parabam</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Subset_example.html"
+                        title="next chapter">Examples subset</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Subset.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Subset_example.html" title="Examples subset"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Fundamentals.html" title="Fundamentals of parabam"
+             >previous</a> |</li>
+        <li><a href="index.html">parabam 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Henry Farmery.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

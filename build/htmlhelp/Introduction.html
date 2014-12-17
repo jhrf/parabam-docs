@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252" />
+    
+    <title>Preface - Quickstart</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="top" title="parabam 0.1 documentation" href="index.html" />
+    <link rel="next" title="Fundamentals of parabam" href="Fundamentals.html" />
+    <link rel="prev" title="Welcome to parabam" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Fundamentals.html" title="Fundamentals of parabam"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to parabam"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">parabam 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="preface-quickstart">
+<h1>Preface - Quickstart</h1>
+<p>For those who don&#8217;t want to read the docs before jumping in, try the code snippets below to get going with parabam as quickly as possible.</p>
+<p>First open your terminal and install parabam:</p>
+<div class="highlight-shell"><div class="highlight"><pre>sudo pip install parabam
+</pre></div>
+</div>
+<p>Then in your terminal create a directory to run your parabam analysis on:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span class="nb">cd</span> ~
+mkdir parabam-analysis
+</pre></div>
+</div>
+<p>Open your favourite code editor and paste this code into a file. Save this file &#8220;instructions.py&#8221; in the directory you created in the step above:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">engine</span><span class="p">(</span><span class="n">read</span><span class="p">,</span><span class="n">constants</span><span class="p">,</span><span class="n">master</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s">&quot;ATCGATCG&quot;</span> <span class="ow">in</span> <span class="n">read</span><span class="o">.</span><span class="n">seq</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</pre></div>
+</div>
+<p>Now locate the BAM file you wish to run parabam analysis on. Then type the following into your terminal command line:</p>
+<div class="highlight-shell"><div class="highlight"><pre>parabam subset -v2 -i instructions -b /path/to/bam/file_name.bam
+</pre></div>
+</div>
+<p>After a while (depending on how large your input BAM file was) parabam will be finished and you will be left with a at <cite>&lt;file_name&gt;_subset.bam</cite>.</p>
+<p>Congratulations you just ran parabam subset. Read on to find out more.</p>
+</div>
+<div class="section" id="introduction">
+<h1>Introduction</h1>
+<p>So, you&#8217;ve got this far through the documentation which means you are at least reasonably curious about parabam. Great!</p>
+<p>The goal of parabam is to allow the user to inspect large BAM files in a timely manner whilst making the most of thier computational resources and without having to write too much code. The most direct way to use parabam is via the command line, but it can also be invokved programaticaly via interface classes and also support full incorporation via OOP inheritance.</p>
+<p>If any of the words in the pragraph above don&#8217;t make sense: <em>don&#8217;t worry</em>. Parabam is easy to run for beginniners. All you need is to know a little bit of unix (how to make and change directories) and a little bit of python. Just follow the instructions and you&#8217;ll be conducting hi-throughput analysis in no time. If you have any questions, feel free to email me.</p>
+<p>Alternatively, if you understood every word of the above and want to get more indepth with parabam then pay close attention to the programatic and inheritence based interfaces.</p>
+<div class="section" id="installing-parabam">
+<h2>Installing parabam</h2>
+<p>First, we have to get parabam running on your computer. This section will guide you through installing parabam.</p>
+<p>Currently, parabam is only available to POSIX compliment systems (Linux, Mac OSX, etc) and not Windows.</p>
+<div class="section" id="the-easy-way">
+<h3>The easy way</h3>
+<p>The easiset way to install parabam is as follows:</p>
+<div class="highlight-shell"><div class="highlight"><pre>sudo pip install parabam
+</pre></div>
+</div>
+<p>This will also place an exectuable in a location on your path. So after typing this command you should be able to do the following:</p>
+<div class="highlight-shell"><div class="highlight"><pre>&gt;&gt;&gt; parabam
+&gt;&gt;&gt; parabam
+    ----------------------------------------------------------------
+
+    About:
+        Parabam - analyse bam file in parallel
+
+    Usage:
+        parabam &lt;<span class="nb">command</span>&gt; <span class="o">[</span>options<span class="o">]</span> instruction:<span class="o">{</span>Python<span class="o">}</span> input:<span class="o">{</span>BAM<span class="o">}</span> output:<span class="o">{</span>BAM/CSV<span class="o">}</span>
+
+    Command:
+
+        stat     Genereate stats regarding the BAM file
+        subset   Create a subsetted BAM file
+</pre></div>
+</div>
+<p>If typing <cite>parbam</cite> into your terminal yields the result above, you have succesfully installed parabam.</p>
+</div>
+<div class="section" id="the-manual-way">
+<h3>The manual way</h3>
+<p>Some users may wish to install from source. The source may be downloaded from here (link to path).
+This part of the documents aren&#8217;t written yet, but if you want to do this you probably know how to do it anyway.</p>
+</div>
+<div class="section" id="the-precompiled-way">
+<h3>The precompiled way</h3>
+<p>If you really can&#8217;t be bothered, then perhap you could try some of the precompiled binaries listed here.</p>
+<p>Simply copy these to a location on your path and type:</p>
+<p>It should work out of the box if you picked the right binary.</p>
+</div>
+</div>
+<div class="section" id="running-parabam-on-a-cluster">
+<h2>Running parabam on a cluster</h2>
+<p>Some users may wish to run parabam on a high powered computing service like a cluster. On systems such as these you may not have root access, so you may not be able to install python directories. In these cases you may wish to use parabam within a virtualenv.</p>
+</div>
+</div>
+<div class="section" id="useful-document-links">
+<h1>Useful Document Links</h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Fundamentals.html" title="Fundamentals of parabam"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to parabam"
+             >previous</a> |</li>
+        <li><a href="index.html">parabam 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Henry Farmery.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

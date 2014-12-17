@@ -1,0 +1,45 @@
+[OPTIONS]
+Binary TOC=No
+Binary Index=No
+Compiled file=parabamdoc.chm
+Contents file=parabamdoc.hhc
+Default Window=parabamdoc
+Default topic=index.html
+Display compile progress=No
+Full text search stop list file=parabamdoc.stp
+Full-text search=Yes
+Index file=parabamdoc.hhk
+Language=0x409
+Title=parabam 0.1 documentation
+
+[WINDOWS]
+parabamdoc="parabam 0.1 documentation","parabamdoc.hhc","parabamdoc.hhk","index.html","index.html",,,,,0x63520,220,0x10384e,[0,0,1024,768],,,,,,,0
+
+[FILES]
+Fundamentals.html
+genindex.html
+index.html
+Introduction.html
+py-modindex.html
+Stat.html
+Stat_example.html
+Subset.html
+Subset_example.html
+Technical.html
+_modules\index.html
+_modules\pysam.html
+_modules\parabam\interface\subset.html
+_static\ajax-loader.gif
+_static\basic.css
+_static\comment-bright.png
+_static\comment-close.png
+_static\comment.png
+_static\default.css
+_static\down-pressed.png
+_static\down.png
+_static\file.png
+_static\minus.png
+_static\plus.png
+_static\pygments.css
+_static\up-pressed.png
+_static\up.png

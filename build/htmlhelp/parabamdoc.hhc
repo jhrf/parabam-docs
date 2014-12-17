@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+        <param name="Window Styles" value="0x801227">
+        <param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="parabam 0.1 documentation">
+    <param name="Local" value="index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Python Module Index">
+    <param name="Local" value="py-modindex.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Preface - Quickstart">
+    <param name="Local" value="Introduction.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Introduction">
+    <param name="Local" value="Introduction.html#introduction">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Installing parabam">
+    <param name="Local" value="Introduction.html#installing-parabam">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="The easy way">
+    <param name="Local" value="Introduction.html#the-easy-way">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="The manual way">
+    <param name="Local" value="Introduction.html#the-manual-way">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="The precompiled way">
+    <param name="Local" value="Introduction.html#the-precompiled-way">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Running parabam on a cluster">
+    <param name="Local" value="Introduction.html#running-parabam-on-a-cluster">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Useful Document Links">
+    <param name="Local" value="Introduction.html#useful-document-links">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Fundamentals of parabam">
+    <param name="Local" value="Fundamentals.html">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="The subset and stat operations">
+    <param name="Local" value="Fundamentals.html#the-subset-and-stat-operations">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Ways of interacting with parabam">
+    <param name="Local" value="Fundamentals.html#ways-of-interacting-with-parabam">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Engines and constants">
+    <param name="Local" value="Fundamentals.html#engines-and-constants">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Pysam classes: read and master">
+    <param name="Local" value="Fundamentals.html#pysam-classes-read-and-master">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="read (AlignedSegment)">
+    <param name="Local" value="Fundamentals.html#read-alignedsegment">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="master (AlignmentFile)">
+    <param name="Local" value="Fundamentals.html#master-alignmentfile">
+</OBJECT>
+</UL>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="The subset interface">
+    <param name="Local" value="Subset.html">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="What is the subset interface for?">
+    <param name="Local" value="Subset.html#what-is-the-subset-interface-for">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Producing a single subset">
+    <param name="Local" value="Subset.html#producing-a-single-subset">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="From the command line">
+    <param name="Local" value="Subset.html#from-the-command-line">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Programatically">
+    <param name="Local" value="Subset.html#programatically">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Producing multiple subset">
+    <param name="Local" value="Subset.html#producing-multiple-subset">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="From the command line">
+    <param name="Local" value="Subset.html#id1">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Programatically">
+    <param name="Local" value="Subset.html#id2">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Subset Specification">
+    <param name="Local" value="Subset.html#subset-specification">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="The stat Interface">
+    <param name="Local" value="Stat.html">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="What is the stat interface for?">
+    <param name="Local" value="Stat.html#what-is-the-stat-interface-for">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Technical Details">
+    <param name="Local" value="Technical.html">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="How does parabam actually work?">
+    <param name="Local" value="Technical.html#how-does-parabam-actually-work">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Examples subset">
+    <param name="Local" value="Subset_example.html">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="From the command line">
+    <param name="Local" value="Subset_example.html#from-the-command-line">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="From within python">
+    <param name="Local" value="Subset_example.html#from-within-python">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="Examples: stat">
+    <param name="Local" value="Stat_example.html">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="From the command line">
+    <param name="Local" value="Stat_example.html#from-the-command-line">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="From within python">
+    <param name="Local" value="Stat_example.html#from-within-python">
+</OBJECT>
+</UL>
+</UL></BODY></HTML>

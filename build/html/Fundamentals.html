@@ -1,0 +1,957 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fundamentals of parabam &mdash; parabam 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="parabam 0.1 documentation" href="index.html" />
+    <link rel="next" title="The subset interface" href="Subset.html" />
+    <link rel="prev" title="Preface - Quickstart" href="Introduction.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Subset.html" title="The subset interface"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Introduction.html" title="Preface - Quickstart"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">parabam 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fundamentals-of-parabam">
+<h1>Fundamentals of parabam<a class="headerlink" href="#fundamentals-of-parabam" title="Permalink to this headline">¶</a></h1>
+<p>Here are some fundamental concepts relating to parabam that will make interacting with parabam easier.</p>
+<div class="section" id="the-subset-and-stat-operations">
+<h2>The <tt class="docutils literal"><span class="pre">subset</span></tt> and <tt class="docutils literal"><span class="pre">stat</span></tt> operations<a class="headerlink" href="#the-subset-and-stat-operations" title="Permalink to this headline">¶</a></h2>
+<p>Currently parabam allows you to conduct to separate &#8220;operations&#8221;. These are <tt class="docutils literal"><span class="pre">subset</span></tt> and <tt class="docutils literal"><span class="pre">stat</span></tt>.</p>
+<p>The <a class="reference internal" href="Subset.html"><em>subset</em></a> operation allows the user to create BAMs containing a specific subset of reads from within a given BAM file. For example, a subset BAM containing all of the unmapped reads in the file, or all the read which contain a certain sequence.</p>
+<p>The <a class="reference internal" href="Subset.html"><em>stat</em></a> operation allows the user to collect data concerning the reads in a given BAM file. These data are collected and output in a .csv file at the end of operation. Data can be collected as an int, float or numpy array. For instance, the user may wish to collect the amount of reads in a file that contain a specific sequence, or statistics like the average insert size of a BAM file.</p>
+</div>
+<div class="section" id="ways-of-interacting-with-parabam">
+<h2>Ways of interacting with parabam<a class="headerlink" href="#ways-of-interacting-with-parabam" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways to interact with parabam. The most direct way is to write a short instructions script in python and then run this on the command line. For details on how to write instructions files for the various parabam operations consult the <a class="reference internal" href="Subset.html"><em>subset</em></a> and <a class="reference internal" href="Stat.html"><em>stat</em></a> sections.</p>
+<p>Users may also incorporate parabam into their own programs. This is as simple as importing the relevant Interface class for your intended operation (subset or stat) and then providing the relevant arguments.</p>
+<p>Examples for both of these methods may be found on the <a class="reference internal" href="Subset_example.html"><em>subset examples</em></a> and <a class="reference internal" href="Stat_example.html"><em>stat examples</em></a> pages.</p>
+</div>
+<div class="section" id="engines-and-constants">
+<h2>Engines and constants<a class="headerlink" href="#engines-and-constants" title="Permalink to this headline">¶</a></h2>
+<p>parabam works by applying an <tt class="docutils literal"><span class="pre">engine</span></tt> (a user defined function) to every read in the BAM file. Engines are simple functions that only take three arguments. These are:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#read-section-label"><em>read</em></a> - A sequencing read. This is an object of type pysam.AlignedSegment</li>
+<li>constants - A set of user defined constants. This is a simple python <tt class="docutils literal"><span class="pre">dict</span></tt>.</li>
+<li><a class="reference internal" href="#master-section-label"><em>master</em></a> - An object which represents the sample BAM file from which the read originated file. This is an object of type pysam.AlignmentFile</li>
+</ul>
+<p>For example which show in detail how to create engines for both subset and stat operations, see the <a class="reference internal" href="Subset.html"><em>subset</em></a> and <a class="reference internal" href="Stat.html"><em>stat</em></a> sections.</p>
+</div>
+<div class="section" id="pysam-classes-read-and-master">
+<h2>Pysam classes: read and master<a class="headerlink" href="#pysam-classes-read-and-master" title="Permalink to this headline">¶</a></h2>
+<p>parabam uses the package <tt class="docutils literal"><span class="pre">pysam</span></tt> to process BAM files. As such the objects we interact with are pysam classes.</p>
+<p>The most prevalent examples of pysam objects are the <tt class="docutils literal"><span class="pre">read</span></tt> and <tt class="docutils literal"><span class="pre">master</span></tt> arguments when defining an <tt class="docutils literal"><span class="pre">engine</span></tt>. The read is of type <tt class="docutils literal"><span class="pre">AlignedSegment</span></tt> and master is of type <tt class="docutils literal"><span class="pre">AlignmentFile</span></tt>. Both of these are pysam classes. Their documentation is reproduced here for reference. Pysam is entirely the work of Andreas Heger and contributors.</p>
+<p><strong>Please Note</strong>: Users of parabam don&#8217;t need to know a great deal about pysam classes (most of this is taken care of behind the scenes), but when writing engines it will help to know the different variables and functions that you may reference with the <tt class="docutils literal"><span class="pre">read</span></tt> and <tt class="docutils literal"><span class="pre">master</span></tt> arguments.</p>
+<div class="section" id="read-alignedsegment">
+<span id="read-section-label"></span><h3>read (AlignedSegment)<a class="headerlink" href="#read-alignedsegment" title="Permalink to this headline">¶</a></h3>
+<p>Any of the following functions or variables may be referenced when dealing with the <tt class="docutils literal"><span class="pre">read</span></tt></p>
+<dl class="class">
+<dt id="pysam.AlignedSegment">
+<em class="property">class </em><tt class="descclassname">pysam.</tt><tt class="descname">AlignedSegment</tt><a class="headerlink" href="#pysam.AlignedSegment" title="Permalink to this definition">¶</a></dt>
+<dd><p>AlignedSegment()
+Class representing an aligned segment.</p>
+<blockquote>
+<div><p>This class stores a handle to the samtools C-structure representing
+an aligned read. Member read access is forwarded to the C-structure
+and converted into python objects. This implementation should be fast,
+as only the data needed is converted.</p>
+<p>For write access, the C-structure is updated in-place. This is
+not the most efficient way to build BAM entries, as the variable
+length data is concatenated and thus needs to be resized if
+a field is updated. Furthermore, the BAM entry might be
+in an inconsistent state.</p>
+<p>One issue to look out for is that the sequence should always
+be set <em>before</em> the quality scores. Setting the sequence will
+also erase any quality scores that were set previously.</p>
+</div></blockquote>
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.__hash__">
+<tt class="descname">__hash__</tt><a class="headerlink" href="#pysam.AlignedSegment.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__hash__() &lt;==&gt; hash(x)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.__str__">
+<tt class="descname">__str__</tt><a class="headerlink" href="#pysam.AlignedSegment.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>return string representation of alignment.</p>
+<p>The representation is an approximate <em class="xref std std-term">sam</em> format.</p>
+<p>An aligned read might not be associated with a <em class="xref std std-term">AlignmentFile</em>.
+As a result <em class="xref std std-term">tid</em> is shown instead of the reference name.</p>
+<p>Similarly, the tags field is returned in its parsed state.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.bin">
+<tt class="descname">bin</tt><a class="headerlink" href="#pysam.AlignedSegment.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>properties bin</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.cigarstring">
+<tt class="descname">cigarstring</tt><a class="headerlink" href="#pysam.AlignedSegment.cigarstring" title="Permalink to this definition">¶</a></dt>
+<dd><p>the <em class="xref std std-term">cigar</em> alignment as a string.</p>
+<p>The cigar string is a string of alternating integers
+and characters denoting the length and the type of
+an operation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The order length,operation is specified in the
+SAM format. It is different from the order of
+the <tt class="xref py py-attr docutils literal"><span class="pre">cigar</span></tt> property.</p>
+</div>
+<p>Returns None if not present.</p>
+<p>To unset the cigarstring, assign None or the
+empty string.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.cigartuples">
+<tt class="descname">cigartuples</tt><a class="headerlink" href="#pysam.AlignedSegment.cigartuples" title="Permalink to this definition">¶</a></dt>
+<dd><p>the <em class="xref std std-term">cigar</em> alignment. The alignment
+is returned as a list of tuples of (operation, length).</p>
+<p>If the alignment is not present, None is returned.</p>
+<p>The operations are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="58%" />
+<col width="21%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>M</td>
+<td>BAM_CMATCH</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>I</td>
+<td>BAM_CINS</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>D</td>
+<td>BAM_CDEL</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>N</td>
+<td>BAM_CREF_SKIP</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>S</td>
+<td>BAM_CSOFT_CLIP</td>
+<td>4</td>
+</tr>
+<tr class="row-even"><td>H</td>
+<td>BAM_CHARD_CLIP</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td>P</td>
+<td>BAM_CPAD</td>
+<td>6</td>
+</tr>
+<tr class="row-even"><td>=</td>
+<td>BAM_CEQUAL</td>
+<td>7</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>BAM_CDIFF</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The output is a list of (operation, length) tuples, such as
+<tt class="docutils literal"><span class="pre">[(0,</span> <span class="pre">30)]</span></tt>.
+This is different from the SAM specification and
+the <tt class="xref py py-attr docutils literal"><span class="pre">cigarstring</span></tt> property, which uses a
+(length, operation) order, for example: <tt class="docutils literal"><span class="pre">30M</span></tt>.</p>
+</div>
+<p>To unset the cigar property, assign an empty list
+or None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.compare">
+<tt class="descname">compare</tt><big>(</big><em>self</em>, <em>AlignedSegment other</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>return -1,0,1, if contents in this are binary &lt;,=,&gt; to <em>other</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.flag">
+<tt class="descname">flag</tt><a class="headerlink" href="#pysam.AlignedSegment.flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>properties flag</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.get_aligned_pairs">
+<tt class="descname">get_aligned_pairs</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.get_aligned_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of aligned read and reference positions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.get_blocks">
+<tt class="descname">get_blocks</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.get_blocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of start and end positions of
+aligned gapless blocks.</p>
+<p>The start and end positions are in genomic
+coordinates.</p>
+<p>Blocks are not normalized, i.e. two blocks
+might be directly adjacent. This happens if
+the two blocks are separated by an insertion
+in the read.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.get_overlap">
+<tt class="descname">get_overlap</tt><big>(</big><em>self</em>, <em>uint32_t start</em>, <em>uint32_t end</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.get_overlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>return number of aligned bases of read overlapping the interval
+<em>start</em> and <em>end</em> on the reference sequence.</p>
+<p>Return None if cigar alignment is not available.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.get_reference_positions">
+<tt class="descname">get_reference_positions</tt><big>(</big><em>self</em>, <em>full_length=False</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.get_reference_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of reference positions that this read aligns to.</p>
+<p>By default, this method only returns positions in the
+reference that are within the alignment. If <em>full_length</em> is
+set, None values will be included for any soft-clipped or
+unaligned positions within the read. The returned list will
+thus be of the same length as the read.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.infer_query_length">
+<tt class="descname">infer_query_length</tt><big>(</big><em>self</em>, <em>always=True</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.infer_query_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>inferred read length from CIGAR string.</p>
+<p>If <em>always</em> is set to True, the read length
+will be always inferred. If set to False, the length
+of the read sequence will be returned if it is
+available.</p>
+<p>Returns None if CIGAR string is not present.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_duplicate">
+<tt class="descname">is_duplicate</tt><a class="headerlink" href="#pysam.AlignedSegment.is_duplicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if optical or PCR duplicate</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_paired">
+<tt class="descname">is_paired</tt><a class="headerlink" href="#pysam.AlignedSegment.is_paired" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if read is paired in sequencing</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_proper_pair">
+<tt class="descname">is_proper_pair</tt><a class="headerlink" href="#pysam.AlignedSegment.is_proper_pair" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if read is mapped in a proper pair</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_qcfail">
+<tt class="descname">is_qcfail</tt><a class="headerlink" href="#pysam.AlignedSegment.is_qcfail" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if QC failure</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_read1">
+<tt class="descname">is_read1</tt><a class="headerlink" href="#pysam.AlignedSegment.is_read1" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if this is read1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_read2">
+<tt class="descname">is_read2</tt><a class="headerlink" href="#pysam.AlignedSegment.is_read2" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if this is read2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_reverse">
+<tt class="descname">is_reverse</tt><a class="headerlink" href="#pysam.AlignedSegment.is_reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if read is mapped to reverse strand</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_secondary">
+<tt class="descname">is_secondary</tt><a class="headerlink" href="#pysam.AlignedSegment.is_secondary" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if not primary alignment</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.is_unmapped">
+<tt class="descname">is_unmapped</tt><a class="headerlink" href="#pysam.AlignedSegment.is_unmapped" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if read itself is unmapped</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.mapping_quality">
+<tt class="descname">mapping_quality</tt><a class="headerlink" href="#pysam.AlignedSegment.mapping_quality" title="Permalink to this definition">¶</a></dt>
+<dd><p>mapping quality</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.mate_is_reverse">
+<tt class="descname">mate_is_reverse</tt><a class="headerlink" href="#pysam.AlignedSegment.mate_is_reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>true is read is mapped to reverse strand</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.mate_is_unmapped">
+<tt class="descname">mate_is_unmapped</tt><a class="headerlink" href="#pysam.AlignedSegment.mate_is_unmapped" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if the mate is unmapped</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.next_reference_id">
+<tt class="descname">next_reference_id</tt><a class="headerlink" href="#pysam.AlignedSegment.next_reference_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the <em class="xref std std-term">reference</em> id of the mate/next read.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.next_reference_start">
+<tt class="descname">next_reference_start</tt><a class="headerlink" href="#pysam.AlignedSegment.next_reference_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>the position of the mate/next read.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.opt">
+<tt class="descname">opt</tt><big>(</big><em>self</em>, <em>tag</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.opt" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieves optional data given a two-letter <em>tag</em></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.overlap">
+<tt class="descname">overlap</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.overlap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_aligment_length">
+<tt class="descname">query_aligment_length</tt><a class="headerlink" href="#pysam.AlignedSegment.query_aligment_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>length of the aligned query sequence.</p>
+<p>This is equal to <tt class="xref py py-attr docutils literal"><span class="pre">qend</span></tt> - <tt class="xref py py-attr docutils literal"><span class="pre">qstart</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_alignment_end">
+<tt class="descname">query_alignment_end</tt><a class="headerlink" href="#pysam.AlignedSegment.query_alignment_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>end index of the aligned query portion of the sequence (0-based,
+exclusive)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_alignment_length">
+<tt class="descname">query_alignment_length</tt><a class="headerlink" href="#pysam.AlignedSegment.query_alignment_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>length of the query template. This includes soft-clipped bases
+and is equal to <tt class="docutils literal"><span class="pre">len(seq)</span></tt>.</p>
+<p>This property is read-only.</p>
+<p>Returns 0 if not available.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_alignment_qualities">
+<tt class="descname">query_alignment_qualities</tt><a class="headerlink" href="#pysam.AlignedSegment.query_alignment_qualities" title="Permalink to this definition">¶</a></dt>
+<dd><p>aligned query sequence quality values (None if not present). These
+are the quality values that correspond to <tt class="xref py py-attr docutils literal"><span class="pre">query</span></tt>, that
+is, they exclude qualities of <em class="xref std std-term">soft clipped</em> bases. This
+is equal to <tt class="docutils literal"><span class="pre">qual[qstart:qend]</span></tt>.</p>
+<p>Quality scores are returned as a python array of unsigned
+chars. Note that this is not the ASCII-encoded value typically
+seen in FASTQ or SAM formatted files. Thus, no offset of 33
+needs to be subtracted.</p>
+<p>This property is read-only.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_alignment_sequence">
+<tt class="descname">query_alignment_sequence</tt><a class="headerlink" href="#pysam.AlignedSegment.query_alignment_sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>aligned portion of the read.</p>
+<p>This is a substring of <tt class="xref py py-attr docutils literal"><span class="pre">seq</span></tt> that excludes flanking
+bases that were <em class="xref std std-term">soft clipped</em> (None if not present). It
+is equal to <tt class="docutils literal"><span class="pre">seq[qstart:qend]</span></tt>.</p>
+<p>SAM/BAM files may include extra flanking bases that are not
+part of the alignment.  These bases may be the result of the
+Smith-Waterman or other algorithms, which may not require
+alignments that begin at the first residue or end at the last.
+In addition, extra sequencing adapters, multiplex identifiers,
+and low-quality bases that were not considered for alignment
+may have been retained.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_alignment_start">
+<tt class="descname">query_alignment_start</tt><a class="headerlink" href="#pysam.AlignedSegment.query_alignment_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>start index of the aligned query portion of the sequence (0-based,
+inclusive).</p>
+<p>This the index of the first base in <tt class="xref py py-attr docutils literal"><span class="pre">seq</span></tt> that is not
+soft-clipped.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_length">
+<tt class="descname">query_length</tt><a class="headerlink" href="#pysam.AlignedSegment.query_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>the length of the query/read.</p>
+<p>This value corresponds to the length of the sequence supplied
+in the BAM/SAM file. The length of a query is 0 if there is no
+sequence in the BAM/SAM file. In those cases, the read length
+can be inferred from the CIGAR alignment, see
+<tt class="xref py py-meth docutils literal"><span class="pre">pysam.AlignmentFile.infer_query_length.()</span></tt>.</p>
+<p>This property can be set by providing a sequence.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_name">
+<tt class="descname">query_name</tt><a class="headerlink" href="#pysam.AlignedSegment.query_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>the query template name (None if not present)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_qualities">
+<tt class="descname">query_qualities</tt><a class="headerlink" href="#pysam.AlignedSegment.query_qualities" title="Permalink to this definition">¶</a></dt>
+<dd><p>read sequence base qualities, including <em class="xref std std-term">soft
+clipped</em> bases (None if not present).</p>
+<p>Quality scores are returned as a python array of unsigned
+chars. Note that this is not the ASCII-encoded value typically
+seen in FASTQ or SAM formatted files. Thus, no offset of 33
+needs to be subtracted.</p>
+<p>Note that to set quality scores the sequence has to be set
+beforehand as this will determine the expected length of the
+quality score array.</p>
+<p>This method raises a ValueError if the length of the
+quality scores and the sequence are not the same.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.query_sequence">
+<tt class="descname">query_sequence</tt><a class="headerlink" href="#pysam.AlignedSegment.query_sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>read sequence bases, including <em class="xref std std-term">soft clipped</em> bases
+(None if not present).</p>
+<p>Note that assigning to seq will invalidate any quality scores.
+Thus, to in-place edit the sequence and quality scores, copies of
+the quality scores need to be taken. Consider trimming for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">q</span> <span class="o">=</span> <span class="n">read</span><span class="o">.</span><span class="n">qual</span>
+<span class="n">read</span><span class="o">.</span><span class="n">seq</span> <span class="o">=</span> <span class="n">read</span><span class="o">.</span><span class="n">seq</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">read</span><span class="o">.</span><span class="n">qual</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The sequence is returned as it is stored in the BAM file. Some mappers
+might have stored a reverse complement of the original read
+sequence.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.reference_end">
+<tt class="descname">reference_end</tt><a class="headerlink" href="#pysam.AlignedSegment.reference_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>aligned reference position of the read on the reference genome.</p>
+<p>aend points to one past the last aligned residue.
+Returns None if not available.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.reference_id">
+<tt class="descname">reference_id</tt><a class="headerlink" href="#pysam.AlignedSegment.reference_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><em class="xref std std-term">reference</em> ID</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This field contains the index of the reference sequence in
+the sequence dictionary. To obtain the name of the
+reference sequence, use
+<a class="reference internal" href="#pysam.AlignmentFile.getrname" title="pysam.AlignmentFile.getrname"><tt class="xref py py-meth docutils literal"><span class="pre">pysam.AlignmentFile.getrname()</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.reference_length">
+<tt class="descname">reference_length</tt><a class="headerlink" href="#pysam.AlignedSegment.reference_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>aligned length of the read on the reference genome.</p>
+<p>This is equal to <cite>aend - pos</cite>. Returns None if not available.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.reference_start">
+<tt class="descname">reference_start</tt><a class="headerlink" href="#pysam.AlignedSegment.reference_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>0-based leftmost coordinate</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignedSegment.setTag">
+<tt class="descname">setTag</tt><big>(</big><em>self</em>, <em>tag</em>, <em>value</em>, <em>value_type=None</em>, <em>replace=True</em><big>)</big><a class="headerlink" href="#pysam.AlignedSegment.setTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set optional field of alignment <em>tag</em> to <em>value</em>.  <em>value_type</em> may be specified,
+but if not the type will be inferred based on the Python type of <em>value</em></p>
+<p>An existing value of the same tag will be overwritten unless
+<em>replace</em> is set to False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.tags">
+<tt class="descname">tags</tt><a class="headerlink" href="#pysam.AlignedSegment.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>the tags in the AUX field.</p>
+<p>This property permits convenience access to
+the tags. Changes it the returned list will
+not update the tags automatically. Instead,
+the following is required for adding a
+new tag:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">read</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">read</span><span class="o">.</span><span class="n">tags</span> <span class="o">+</span> <span class="p">[(</span><span class="s">&quot;RG&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>This method will happily write the same tag
+multiple times.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignedSegment.template_length">
+<tt class="descname">template_length</tt><a class="headerlink" href="#pysam.AlignedSegment.template_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>the observed query template length</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="master-alignmentfile">
+<span id="master-section-label"></span><h3>master (AlignmentFile)<a class="headerlink" href="#master-alignmentfile" title="Permalink to this headline">¶</a></h3>
+<p>Any of the following functions or variables may be referenced when dealing with the <tt class="docutils literal"><span class="pre">master</span></tt></p>
+<dl class="class">
+<dt id="pysam.AlignmentFile">
+<em class="property">class </em><tt class="descclassname">pysam.</tt><tt class="descname">AlignmentFile</tt><a class="headerlink" href="#pysam.AlignmentFile" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>(filename, mode=None, template = None,</dt>
+<dd>referencenames=None, referencelengths = None,
+text=NULL, header=None,
+add_sq_text=False, check_header=True,
+check_sq=True)*</dd>
+</dl>
+<p>A <em class="xref std std-term">SAM</em>/<em class="xref std std-term">BAM</em> formatted file. The file is
+automatically opened.</p>
+<p><em>mode</em> should be <tt class="docutils literal"><span class="pre">r</span></tt> for reading or <tt class="docutils literal"><span class="pre">w</span></tt> for writing. The
+default is text mode (<em class="xref std std-term">SAM</em>). For binary (<em class="xref std std-term">BAM</em>) I/O
+you should append <tt class="docutils literal"><span class="pre">b</span></tt> for compressed or <tt class="docutils literal"><span class="pre">u</span></tt> for uncompressed
+<em class="xref std std-term">BAM</em> output.  Use <tt class="docutils literal"><span class="pre">h</span></tt> to output header information in
+text (<em class="xref std std-term">TAM</em>) mode.</p>
+<p>If <tt class="docutils literal"><span class="pre">b</span></tt> is present, it must immediately follow <tt class="docutils literal"><span class="pre">r</span></tt> or <tt class="docutils literal"><span class="pre">w</span></tt>.
+Valid modes are <tt class="docutils literal"><span class="pre">r</span></tt>, <tt class="docutils literal"><span class="pre">w</span></tt>, <tt class="docutils literal"><span class="pre">wh</span></tt>, <tt class="docutils literal"><span class="pre">rb</span></tt>, <tt class="docutils literal"><span class="pre">wb</span></tt>, <tt class="docutils literal"><span class="pre">wbu</span></tt> and
+<tt class="docutils literal"><span class="pre">wb0</span></tt>. For instance, to open a <em class="xref std std-term">BAM</em> formatted file for
+reading, type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="n">pysam</span><span class="o">.</span><span class="n">AlignmentFile</span><span class="p">(</span><span class="s">&#39;ex1.bam&#39;</span><span class="p">,</span><span class="s">&#39;rb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If mode is not specified, we will try to auto-detect in the order
+&#8216;rb&#8217;, &#8216;r&#8217;, thus both the following should work:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">f1</span> <span class="o">=</span> <span class="n">pysam</span><span class="o">.</span><span class="n">AlignmentFile</span><span class="p">(</span><span class="s">&#39;ex1.bam&#39;</span><span class="p">)</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">pysam</span><span class="o">.</span><span class="n">AlignmentFile</span><span class="p">(</span><span class="s">&#39;ex1.sam&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If an index for a BAM file exists (.bai), it will be opened
+automatically. Without an index random access to reads via
+<tt class="xref py py-meth docutils literal"><span class="pre">fetch()</span></tt> and <tt class="xref py py-meth docutils literal"><span class="pre">pileup()</span></tt> is disabled.</p>
+<p>For writing, the header of a <em class="xref std std-term">SAM</em> file/<em class="xref std std-term">BAM</em> file can
+be constituted from several sources (see also the samtools format
+specification):</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>If <em>template</em> is given, the header is copied from a another
+<em>AlignmentFile</em> (<em>template</em> must be of type <em>AlignmentFile</em>).</li>
+<li>If <em>header</em> is given, the header is built from a
+multi-level dictionary. The first level are the four types
+(&#8216;HD&#8217;, &#8216;SQ&#8217;, ...). The second level are a list of lines,
+with each line being a list of tag-value pairs. The header
+is constructed first from all the defined fields, followed
+by user tags in alphabetical order.</li>
+<li>If <em>text</em> is given, new header text is copied from raw
+text.</li>
+<li>The names (<em>referencenames</em>) and lengths
+(<em>referencelengths</em>) are supplied directly as lists.  By
+default, &#8216;SQ&#8217; and &#8216;LN&#8217; tags will be added to the header
+text. This option can be changed by unsetting the flag
+<em>add_sq_text</em>.</li>
+</ol>
+</div></blockquote>
+<p>By default, if a file is opened in mode &#8216;r&#8217;, it is checked
+for a valid header (<em>check_header</em> = True) and a definition of
+chromosome names (<em>check_sq</em> = True).</p>
+<dl class="method">
+<dt id="pysam.AlignmentFile.__enter__">
+<tt class="descname">__enter__</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.__enter__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.__exit__">
+<tt class="descname">__exit__</tt><big>(</big><em>self</em>, <em>exc_type</em>, <em>exc_value</em>, <em>traceback</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.__exit__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.__iter__">
+<tt class="descname">__iter__</tt><a class="headerlink" href="#pysam.AlignmentFile.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__iter__() &lt;==&gt; iter(x)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.__next__">
+<tt class="descname">__next__</tt><big>(</big><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.__next__" title="Permalink to this definition">¶</a></dt>
+<dd><p>python version of next().</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.close">
+<tt class="descname">close</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>closes the <a class="reference internal" href="#pysam.AlignmentFile" title="pysam.AlignmentFile"><tt class="xref py py-class docutils literal"><span class="pre">pysam.AlignmentFile</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.count">
+<tt class="descname">count</tt><big>(</big><em>self</em>, <em>reference=None</em>, <em>start=None</em>, <em>end=None</em>, <em>region=None</em>, <em>until_eof=False</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.count" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>(reference = None, start = None, end = None,
+region = None, callback = None, until_eof = False)</em></p>
+<p>count reads <em class="xref std std-term">region</em> using 0-based indexing. The region
+is specified by <em class="xref std std-term">reference</em>, <em>start</em> and
+<em>end</em>. Alternatively, a samtools <em class="xref std std-term">region</em> string can be
+supplied.</p>
+<p>Note that a <em class="xref std std-term">SAM</em> file does not allow random access. If
+<em>region</em> or <em>reference</em> are given, an exception is raised.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.fetch">
+<tt class="descname">fetch</tt><big>(</big><em>self</em>, <em>reference=None</em>, <em>start=None</em>, <em>end=None</em>, <em>region=None</em>, <em>tid=None</em>, <em>callback=None</em>, <em>until_eof=False</em>, <em>multiple_iterators=False</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>fetch aligned reads in a <em class="xref std std-term">region</em> using 0-based indexing. The
+region is specified by <em class="xref std std-term">reference</em>, <em>start</em> and
+<em>end</em>. Alternatively, a samtools <em class="xref std std-term">region</em> string can be
+supplied.</p>
+<p>Without <em>reference</em> or <em>region</em> all mapped reads will be
+fetched. The reads will be returned ordered by reference
+sequence, which will not necessarily be the order within the
+file.</p>
+<p>If <em>until_eof</em> is given, all reads from the current file
+position will be returned in order as they are within the
+file. Using this option will also fetch unmapped reads.</p>
+<p>Set <em>multiple_iterators</em> to true if you will be using multiple
+iterators on the same file at the same time. The iterator returned
+will receive its own copy of a filehandle to the file effectively
+re-opening the file. Re-opening a file creates some
+overhead, so beware.</p>
+<p>If only <em>reference</em> is set, all reads aligned to <em>reference</em>
+will be fetched.</p>
+<p>Note that a <em class="xref std std-term">SAM</em> file does not allow random access. If
+<em>region</em> or <em>reference</em> are given, an exception is raised.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.filename">
+<tt class="descname">filename</tt><a class="headerlink" href="#pysam.AlignmentFile.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of <em class="xref std std-term">filename</em> associated with this object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.getrname">
+<tt class="descname">getrname</tt><big>(</big><em>self</em>, <em>tid</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.getrname" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert numerical <em class="xref std std-term">tid</em> into <em class="xref std std-term">reference</em> name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.gettid">
+<tt class="descname">gettid</tt><big>(</big><em>self</em>, <em>reference</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.gettid" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert <em class="xref std std-term">reference</em> name into numerical <em class="xref std std-term">tid</em></p>
+<p>returns -1 if reference is not known.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.head">
+<tt class="descname">head</tt><big>(</big><em>self</em>, <em>n</em>, <em>multiple_iterators=True</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.head" title="Permalink to this definition">¶</a></dt>
+<dd><p>return iterator over the first n alignments.</p>
+<p>This is useful for inspecting the bam-file.</p>
+<p><em>multiple_iterators</em> is set to True by default in order to
+avoid changing the current file position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.header">
+<tt class="descname">header</tt><a class="headerlink" href="#pysam.AlignmentFile.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>header information within the <em class="xref std std-term">sam file</em>. The records and
+fields are returned as a two-level dictionary.</p>
+<p>The first level contains the record (<tt class="docutils literal"><span class="pre">HD</span></tt>, <tt class="docutils literal"><span class="pre">SQ</span></tt>, etc) and
+the second level contains the fields (<tt class="docutils literal"><span class="pre">VN</span></tt>, <tt class="docutils literal"><span class="pre">LN</span></tt>, etc).</p>
+<p>The parser is validating and will raise an AssertionError if
+if encounters any record or field tags that are not part of
+the SAM specification. Use the
+<a class="reference internal" href="#pysam.AlignmentFile.text" title="pysam.AlignmentFile.text"><tt class="xref py py-attr docutils literal"><span class="pre">pysam.AlignmentFile.text</span></tt></a> attribute to get the unparsed
+header.</p>
+<p>The parsing follows the SAM format specification with the
+exception of the <tt class="docutils literal"><span class="pre">CL</span></tt> field. This option will consume the
+rest of a header line irrespective of any additional fields.
+This behaviour has been added to accommodate command line
+options that contain characters that are not valid field
+separators.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.lengths">
+<tt class="descname">lengths</tt><a class="headerlink" href="#pysam.AlignmentFile.lengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>tuple of the lengths of the <em class="xref std std-term">reference</em> sequences. The
+lengths are in the same order as
+<a class="reference internal" href="#pysam.AlignmentFile.references" title="pysam.AlignmentFile.references"><tt class="xref py py-attr docutils literal"><span class="pre">pysam.AlignmentFile.references</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.mapped">
+<tt class="descname">mapped</tt><a class="headerlink" href="#pysam.AlignmentFile.mapped" title="Permalink to this definition">¶</a></dt>
+<dd><p>total number of mapped alignments in file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.mate">
+<tt class="descname">mate</tt><big>(</big><em>self</em>, <em>AlignedSegment read</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.mate" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the mate of <tt class="xref py py-class docutils literal"><span class="pre">AlignedSegment</span></tt> <em>read</em>.</p>
+<p>Throws a ValueError if read is unpaired or the mate
+is unmapped.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Calling this method will change the file position.
+This might interfere with any iterators that have
+not re-opened the file.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is too slow for high-throughput processing.
+If a read needs to be processed with its mate, work
+from a read name sorted file or, better, cache reads.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.next">
+<tt class="descname">next</tt><a class="headerlink" href="#pysam.AlignmentFile.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.next() -&gt; the next value, or raise StopIteration</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.nocoordinate">
+<tt class="descname">nocoordinate</tt><a class="headerlink" href="#pysam.AlignmentFile.nocoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>total number of reads without coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.nreferences">
+<tt class="descname">nreferences</tt><a class="headerlink" href="#pysam.AlignmentFile.nreferences" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of <em class="xref std std-term">reference</em> sequences in the file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.pileup">
+<tt class="descname">pileup</tt><big>(</big><em>self</em>, <em>reference=None</em>, <em>start=None</em>, <em>end=None</em>, <em>region=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.pileup" title="Permalink to this definition">¶</a></dt>
+<dd><p>perform a <em class="xref std std-term">pileup</em> within a <em class="xref std std-term">region</em>. The region is
+specified by <em class="xref std std-term">reference</em>, <em>start</em> and <em>end</em> (using
+0-based indexing).  Alternatively, a samtools <em>region</em> string
+can be supplied.</p>
+<p>Without <em>reference</em> or <em>region</em> all reads will be used for the
+pileup. The reads will be returned ordered by
+<em class="xref std std-term">reference</em> sequence, which will not necessarily be the
+order within the file.</p>
+<p>The method returns an iterator of type
+<tt class="xref py py-class docutils literal"><span class="pre">pysam.IteratorColumn</span></tt> unless a <em>callback is
+provided. If a *callback</em> is given, the callback will be
+executed for each column within the <em class="xref std std-term">region</em>.</p>
+<p>Note that <em class="xref std std-term">SAM</em> formatted files do not allow random
+access.  In these files, if a <em>region</em> or <em>reference</em> are
+given an exception is raised.</p>
+<p>Optional <em>kwargs</em> to the iterator:</p>
+<dl class="docutils">
+<dt>stepper</dt>
+<dd><p class="first">The stepper controlls how the iterator advances.
+Possible options for the stepper are</p>
+<dl class="last docutils">
+<dt><tt class="docutils literal"><span class="pre">all</span></tt></dt>
+<dd>use all reads for pileup.</dd>
+<dt><tt class="docutils literal"><span class="pre">pass</span></tt></dt>
+<dd>skip reads in which any of the following flags are set:
+BAM_FUNMAP, BAM_FSECONDARY, BAM_FQCFAIL, BAM_FDUP</dd>
+<dt><tt class="docutils literal"><span class="pre">samtools</span></tt></dt>
+<dd>same filter and read processing as in <em class="xref std std-term">csamtools</em>
+pileup. This requires a <em>fastafile</em> to be given.</dd>
+</dl>
+</dd>
+<dt>fastafile</dt>
+<dd>A <tt class="xref py py-class docutils literal"><span class="pre">FastaFile</span></tt> object. This is required for
+some of the steppers.</dd>
+<dt>mask</dt>
+<dd>Skip all reads with bits set in mask if mask=True.</dd>
+<dt>max_depth</dt>
+<dd>Maximum read depth permitted. The default limit is <em>8000</em>.</dd>
+</dl>
+<p>truncate</p>
+<blockquote>
+<div>By default, the samtools pileup engine outputs all reads
+overlapping a region (see note below).  If truncate is True
+and a region is given, only output columns in the exact
+region specificied.</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>all</em> reads which overlap the region are returned. The
+first base returned will be the first base of the first
+read <em>not</em> necessarily the first base of the region used
+in the query.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.references">
+<tt class="descname">references</tt><a class="headerlink" href="#pysam.AlignmentFile.references" title="Permalink to this definition">¶</a></dt>
+<dd><p>tuple with the names of <em class="xref std std-term">reference</em> sequences.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.reset">
+<tt class="descname">reset</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset file position to beginning of file just after
+the header.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.seek">
+<tt class="descname">seek</tt><big>(</big><em>self</em>, <em>uint64_t offset</em>, <em>int where=0</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.seek" title="Permalink to this definition">¶</a></dt>
+<dd><p>move file pointer to position <em>offset</em>, see <a class="reference internal" href="#pysam.AlignmentFile.tell" title="pysam.AlignmentFile.tell"><tt class="xref py py-meth docutils literal"><span class="pre">pysam.AlignmentFile.tell()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.tell">
+<tt class="descname">tell</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#pysam.AlignmentFile.tell" title="Permalink to this definition">¶</a></dt>
+<dd><p>return current file position.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.text">
+<tt class="descname">text</tt><a class="headerlink" href="#pysam.AlignmentFile.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>full contents of the <em class="xref std std-term">sam file</em> header as a string</p>
+<p>See <a class="reference internal" href="#pysam.AlignmentFile.header" title="pysam.AlignmentFile.header"><tt class="xref py py-attr docutils literal"><span class="pre">pysam.AlignmentFile.header</span></tt></a> to get a parsed
+representation of the header.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pysam.AlignmentFile.unmapped">
+<tt class="descname">unmapped</tt><a class="headerlink" href="#pysam.AlignmentFile.unmapped" title="Permalink to this definition">¶</a></dt>
+<dd><p>total number of unmapped reads in file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysam.AlignmentFile.write">
+<tt class="descname">write</tt><big>(</big><em>self</em>, <em>AlignedSegment read</em><big>)</big> &rarr; int<a class="headerlink" href="#pysam.AlignmentFile.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>write a single <a class="reference internal" href="#pysam.AlignedSegment" title="pysam.AlignedSegment"><tt class="xref py py-class docutils literal"><span class="pre">pysam.AlignedSegment</span></tt></a> to disk.</p>
+<p>returns the number of bytes written.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fundamentals of parabam</a><ul>
+<li><a class="reference internal" href="#the-subset-and-stat-operations">The <tt class="docutils literal"><span class="pre">subset</span></tt> and <tt class="docutils literal"><span class="pre">stat</span></tt> operations</a></li>
+<li><a class="reference internal" href="#ways-of-interacting-with-parabam">Ways of interacting with parabam</a></li>
+<li><a class="reference internal" href="#engines-and-constants">Engines and constants</a></li>
+<li><a class="reference internal" href="#pysam-classes-read-and-master">Pysam classes: read and master</a><ul>
+<li><a class="reference internal" href="#read-alignedsegment">read (AlignedSegment)</a></li>
+<li><a class="reference internal" href="#master-alignmentfile">master (AlignmentFile)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Introduction.html"
+                        title="previous chapter">Preface - Quickstart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Subset.html"
+                        title="next chapter">The <cite>subset</cite> interface</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Fundamentals.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Subset.html" title="The subset interface"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Introduction.html" title="Preface - Quickstart"
+             >previous</a> |</li>
+        <li><a href="index.html">parabam 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Henry Farmery.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

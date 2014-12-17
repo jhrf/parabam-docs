@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysam &mdash; parabam 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="parabam 0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">parabam 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pysam</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">pysam.libchtslib</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">pysam.ctabix</span> <span class="kn">as</span> <span class="nn">ctabix</span>
+<span class="kn">from</span> <span class="nn">pysam.ctabix</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pysam.csamfile</span> <span class="kn">as</span> <span class="nn">csamfile</span>
+<span class="kn">from</span> <span class="nn">pysam.csamfile</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pysam.calignmentfile</span> <span class="kn">as</span> <span class="nn">calignmentfile</span>
+<span class="kn">from</span> <span class="nn">pysam.calignmentfile</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pysam.cfaidx</span> <span class="kn">as</span> <span class="nn">cfaidx</span>
+<span class="kn">from</span> <span class="nn">pysam.cfaidx</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pysam.cvcf</span> <span class="kn">as</span> <span class="nn">cvcf</span>
+<span class="kn">from</span> <span class="nn">pysam.cvcf</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pysam.csamtools</span> <span class="kn">as</span> <span class="nn">csamtools</span>
+
+<span class="kn">import</span> <span class="nn">pysam.Pileup</span> <span class="kn">as</span> <span class="nn">Pileup</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<div class="viewcode-block" id="SamtoolsError"><a class="viewcode-back" href="../Fundamentals.html#pysam.SamtoolsError">[docs]</a><span class="k">class</span> <span class="nc">SamtoolsError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;exception raised in case of an error incurred in the samtools</span>
+<span class="sd">    library.&#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="SamtoolsDispatcher"><a class="viewcode-back" href="../Fundamentals.html#pysam.SamtoolsDispatcher">[docs]</a><span class="k">class</span> <span class="nc">SamtoolsDispatcher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;samtools dispatcher.</span>
+
+<span class="sd">    Emulates the samtools command line as module calls.</span>
+
+<span class="sd">    Captures stdout and stderr.</span>
+
+<span class="sd">    Raises a :class:`pysam.SamtoolsError` exception in case</span>
+<span class="sd">    samtools exits with an error code other than 0.</span>
+
+<span class="sd">    Some command line options are associated with parsers.  For</span>
+<span class="sd">    example, the samtools command &quot;pileup -c&quot; creates a tab-separated</span>
+<span class="sd">    table on standard output. In order to associate parsers with</span>
+<span class="sd">    options, an optional list of parsers can be supplied. The list</span>
+<span class="sd">    will be processed in order checking for the presence of each</span>
+<span class="sd">    option.</span>
+
+<span class="sd">    If no parser is given or no appropriate parser is found, the</span>
+<span class="sd">    stdout output of samtools commands will be returned.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">dispatch</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">parsers</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dispatch</span><span class="p">,</span> <span class="n">parsers</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span> <span class="o">=</span> <span class="n">dispatch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span> <span class="o">=</span> <span class="n">parsers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="SamtoolsDispatcher.__call__"><a class="viewcode-back" href="../Fundamentals.html#pysam.SamtoolsDispatcher.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;execute a samtools command</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">retval</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">stdout</span> <span class="o">=</span> <span class="n">csamtools</span><span class="o">.</span><span class="n">_samtools_dispatch</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">retval</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SamtoolsError</span><span class="p">(</span>
+                <span class="s">&#39;csamtools returned with error </span><span class="si">%i</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="n">retval</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stderr</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">stderr</span>
+        <span class="c"># samtools commands do not propagate the return code correctly.</span>
+        <span class="c"># I have thus added this patch to throw if there is output on stderr.</span>
+        <span class="c"># Note that there is sometimes output on stderr that is not an error,</span>
+        <span class="c"># for example: [sam_header_read2] 2 sequences loaded.</span>
+        <span class="c"># Ignore messages like these</span>
+        <span class="n">stderr</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">stderr</span>
+                  <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;[sam_header_read2]&quot;</span><span class="p">)</span> <span class="ow">or</span>
+                          <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;[bam_index_load]&quot;</span><span class="p">)</span> <span class="ow">or</span>
+                          <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;[bam_sort_core]&quot;</span><span class="p">)</span> <span class="ow">or</span>
+                          <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;[samopen] SAM header is present&quot;</span><span class="p">))</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="n">stderr</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SamtoolsError</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stderr</span><span class="p">))</span>
+
+        <span class="c"># call parser for stdout:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;raw&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">stdout</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">options</span><span class="p">,</span> <span class="n">parser</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                        <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">parser</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">stdout</span>
+</div>
+    <span class="k">def</span> <span class="nf">get_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span>
+
+<div class="viewcode-block" id="SamtoolsDispatcher.usage"><a class="viewcode-back" href="../Fundamentals.html#pysam.SamtoolsDispatcher.usage">[docs]</a>    <span class="k">def</span> <span class="nf">usage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;return the samtools usage information for this command&#39;&#39;&#39;</span>
+        <span class="n">retval</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">stdout</span> <span class="o">=</span> <span class="n">csamtools</span><span class="o">.</span><span class="n">_samtools_dispatch</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stderr</span><span class="p">)</span>
+
+<span class="c">#</span>
+<span class="c"># samtools command line options to export in python</span>
+<span class="c">#</span>
+<span class="c"># import is a python reserved word.</span></div></div>
+<span class="n">SAMTOOLS_DISPATCH</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c"># samtools &#39;documented&#39; commands</span>
+    <span class="s">&quot;view&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;view&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;sort&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;sort&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;mpileup&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;mpileup&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;depth&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;depth&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;faidx&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;faidx&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;tview&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;tview&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;index&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;idxstats&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;idxstats&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;fixmate&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;fixmate&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;flagstat&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;flagstat&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;calmd&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;calmd&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;merge&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;merge&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;rmdup&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;rmdup&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;reheader&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;reheader&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;cat&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;cat&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;targetcut&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;targetcut&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;phase&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;phase&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="c"># others</span>
+    <span class="s">&quot;samimport&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;import&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;bam2fq&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;bam2fq&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;pad2unpad&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;pad2unpad&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;depad&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;pad2unpad&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;bedcov&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;bedcov&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="s">&quot;bamshuf&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;bamshuf&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+    <span class="c"># obsolete</span>
+    <span class="c"># &quot;pileup&quot;: &quot;pileup&quot;, ( ((&quot;-c&quot;,), Pileup.iterate),),),</span>
+<span class="p">}</span>
+
+<span class="c"># instantiate samtools commands as python functions</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">options</span> <span class="ow">in</span> <span class="n">SAMTOOLS_DISPATCH</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">cmd</span><span class="p">,</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">options</span>
+    <span class="nb">globals</span><span class="p">()[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">SamtoolsDispatcher</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+
+<span class="c"># hack to export all the symbols from separate modules</span>
+<span class="n">__all__</span> <span class="o">=</span> \
+    <span class="n">libchtslib</span><span class="o">.</span><span class="n">__all__</span> <span class="o">+</span> \
+    <span class="n">ctabix</span><span class="o">.</span><span class="n">__all__</span> <span class="o">+</span> \
+    <span class="n">cvcf</span><span class="o">.</span><span class="n">__all__</span> <span class="o">+</span>\
+    <span class="n">cfaidx</span><span class="o">.</span><span class="n">__all__</span> <span class="o">+</span>\
+    <span class="n">calignmentfile</span><span class="o">.</span><span class="n">__all__</span> <span class="o">+</span>\
+    <span class="n">csamfile</span><span class="o">.</span><span class="n">__all__</span> <span class="o">+</span>\
+    <span class="p">[</span><span class="s">&quot;SamtoolsError&quot;</span><span class="p">,</span> <span class="s">&quot;SamtoolsDispatcher&quot;</span><span class="p">]</span> <span class="o">+</span>\
+    <span class="nb">list</span><span class="p">(</span><span class="n">SAMTOOLS_DISPATCH</span><span class="p">)</span> <span class="o">+</span>\
+    <span class="p">[</span><span class="s">&quot;Pileup&quot;</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">pysam.version</span> <span class="kn">import</span> <span class="n">__version__</span><span class="p">,</span> <span class="n">__samtools_version__</span>
+
+
+<span class="k">def</span> <span class="nf">get_include</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;return a list of include directories.&#39;&#39;&#39;</span>
+    <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dirname</span><span class="p">,</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="s">&#39;include&#39;</span><span class="p">,</span> <span class="s">&#39;htslib&#39;</span><span class="p">),</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="s">&#39;include&#39;</span><span class="p">,</span> <span class="s">&#39;samtools&#39;</span><span class="p">)]</span>
+
+
+<span class="k">def</span> <span class="nf">get_defines</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;return a list of defined compilation parameters.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="s">&#39;_FILE_OFFSET_BITS&#39;</span><span class="p">,</span> <span class="s">&#39;64&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">&#39;_USE_KNETFILE&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)]</span>
+
+
+<span class="k">def</span> <span class="nf">get_libraries</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;return a list of libraries to link against.&#39;&#39;&#39;</span>
+    <span class="c"># Note that this list does not include csamtools.so as there are</span>
+    <span class="c"># numerous name conflicts with libchtslib.so.</span>
+    <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span>
+        <span class="s">&#39;libchtslib.so&#39;</span><span class="p">,</span>
+        <span class="s">&#39;TabProxies.so&#39;</span><span class="p">,</span>
+        <span class="s">&#39;cfaidx.so&#39;</span><span class="p">,</span>
+        <span class="s">&#39;csamfile.so&#39;</span><span class="p">,</span>
+        <span class="s">&#39;cvcf.so&#39;</span><span class="p">,</span>
+        <span class="s">&#39;ctabix.so&#39;</span><span class="p">)]</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">parabam 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Henry Farmery.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
