@@ -86,13 +86,21 @@ We then need to write the code that allows us to create the subsets. It's more i
 		if read.is_qcfail:
 			belongs.append("failed_qc")
 		elif read.is_secondary:
-			belongs.append("failed_qc")
+			belongs.append("secondary_aligment")
 
 		return belongs
 
 The above code block sees us introduce the function "get_subset_types". Notice how first we define the subset groups as a list of strings. These strings can be anything you want, but it make sense to label them appropriately. 
 
 Then, in the engine we return a list of subsets to which the read belongs. For example, if a read returns True for both ``is_qcfail`` and ``is_secondary`` it will be added to both files.
+
+We can then run parabam from the command line like so, imagining that we have a file `human_sample_001.bam`:
+
+.. code-block:: shell
+	
+	parabam subset -v2 -i multiple_subsets -b /path/to/bam/human_sample_001.bam
+
+This will produce two files. One file called ``human_sample_001_failed_qc.bam`` and the other called ``human_sample_001_secondary_aligments.bam``. Notice that parabam automatically handles the naming of these files.
 
 Programatically
 ---------------

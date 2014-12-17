@@ -113,13 +113,18 @@ touch multiple_subsets.py
         <span class="k">if</span> <span class="n">read</span><span class="o">.</span><span class="n">is_qcfail</span><span class="p">:</span>
                 <span class="n">belongs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;failed_qc&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">read</span><span class="o">.</span><span class="n">is_secondary</span><span class="p">:</span>
-                <span class="n">belongs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;failed_qc&quot;</span><span class="p">)</span>
+                <span class="n">belongs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;secondary_aligment&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">belongs</span>
 </pre></div>
 </div>
 <p>The above code block sees us introduce the function &#8220;get_subset_types&#8221;. Notice how first we define the subset groups as a list of strings. These strings can be anything you want, but it make sense to label them appropriately.</p>
 <p>Then, in the engine we return a list of subsets to which the read belongs. For example, if a read returns True for both <tt class="docutils literal"><span class="pre">is_qcfail</span></tt> and <tt class="docutils literal"><span class="pre">is_secondary</span></tt> it will be added to both files.</p>
+<p>We can then run parabam from the command line like so, imagining that we have a file <cite>human_sample_001.bam</cite>:</p>
+<div class="highlight-shell"><div class="highlight"><pre>parabam subset -v2 -i multiple_subsets -b /path/to/bam/human_sample_001.bam
+</pre></div>
+</div>
+<p>This will produce two files. One file called <tt class="docutils literal"><span class="pre">human_sample_001_failed_qc.bam</span></tt> and the other called <tt class="docutils literal"><span class="pre">human_sample_001_secondary_aligments.bam</span></tt>. Notice that parabam automatically handles the naming of these files.</p>
 </div>
 <div class="section" id="programatically">
 <h3>Programatically<a class="headerlink" href="#programatically" title="Permalink to this headline">¶</a></h3>

@@ -32,6 +32,11 @@ parabam works by applying an ``engine`` (a user defined function) to every read 
 
 For example which show in detail how to create engines for both subset and stat operations, see the :doc:`subset <Subset>` and :doc:`stat <Stat>` sections.
 
+Output Files
+++++++++++++
+
+Certain invocations of parabam will create many output files. Particularly runs using multiple statistics or multiple  
+
 Pysam classes: read and master
 ++++++++++++++++++++++++++++++
 
