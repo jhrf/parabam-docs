@@ -1,3 +1,5 @@
+from distutils.core import setup
+
 setup(name='parabam-docs',
 	  description='Documents for parabam',
       version='0.1.1dev',
