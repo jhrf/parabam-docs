@@ -105,6 +105,10 @@ This will produce two files. One file called ``human_sample_001_failed_qc.bam`` 
 Programatically
 ---------------
 
+It is possible to integrate parabam subset into your program by making use of the interface class. 
+
+Simply create a new object of type parabam.subset.Interface and call the run method. The specification follows.
+
 Subset Specification
 ++++++++++++++++++++
 
