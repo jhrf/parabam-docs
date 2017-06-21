@@ -34,7 +34,7 @@ Now we edit the file we just created - *get_unmapped_reads.py* - to include the 
 
 .. code-block:: python
 
-	def engine(read,constants,master):
+	def rule(read,constants,master):
 		if read.is_unmapped:
 			return True
 		return False
@@ -81,7 +81,7 @@ We then need to write the code that allows us to create the subsets. It's more i
 	def get_subset_types():
 		return ["failed_qc","secondary_aligments"]
 
-	def engine(read,constants,master):
+	def rule(read,constants,master):
 		belongs = []
 		if read.is_qcfail:
 			belongs.append("failed_qc")
@@ -92,7 +92,7 @@ We then need to write the code that allows us to create the subsets. It's more i
 
 The above code block sees us introduce the function "get_subset_types". Notice how first we define the subset groups as a list of strings. These strings can be anything you want, but it make sense to label them appropriately. 
 
-Then, in the engine we return a list of subsets to which the read belongs. For example, if a read returns True for both ``is_qcfail`` and ``is_secondary`` it will be added to both files.
+Then, in the rule we return a list of subsets to which the read belongs. For example, if a read returns True for both ``is_qcfail`` and ``is_secondary`` it will be added to both files.
 
 We can then run parabam from the command line like so, imagining that we have a file `human_sample_001.bam`:
 

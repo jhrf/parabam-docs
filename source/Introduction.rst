@@ -27,7 +27,7 @@ Open the `instruction.py` file in your favourite text editor and paste this code
 
 .. code-block:: python
 
-	def engine(read,constants,master):
+	def rule(read,constants,master):
 		if "ATCGATCG" in read.seq:
 			return True
 		return False

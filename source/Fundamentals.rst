@@ -24,13 +24,13 @@ Examples for both of these methods may be found on the :doc:`subset examples <Su
 Engines and constants
 +++++++++++++++++++++
 
-parabam works by applying an ``engine`` (a user defined function) to every read in the BAM file. Engines are simple functions that only take three arguments. These are:
+parabam works by applying an ``rule`` (a user defined function) to every read in the BAM file. Engines are simple functions that only take three arguments. These are:
 
 * :ref:`read <read-section-label>` - A sequencing read. This is an object of type pysam.AlignedSegment
 * constants - A set of user defined constants. This is a simple python ``dict``.
 * :ref:`master <master-section-label>` - An object which represents the sample BAM file from which the read originated file. This is an object of type pysam.AlignmentFile
 
-For example which show in detail how to create engines for both subset and stat operations, see the :doc:`subset <Subset>` and :doc:`stat <Stat>` sections.
+For example which show in detail how to create rules for both subset and stat operations, see the :doc:`subset <Subset>` and :doc:`stat <Stat>` sections.
 
 Output Files
 ++++++++++++
@@ -42,9 +42,9 @@ Pysam classes: read and master
 
 parabam uses the package ``pysam`` to process BAM files. As such the objects we interact with are pysam classes.
 
-The most prevalent examples of pysam objects are the ``read`` and ``master`` arguments when defining an ``engine``. The read is of type ``AlignedSegment`` and master is of type ``AlignmentFile``. Both of these are pysam classes. Their documentation is reproduced here for reference. Pysam is entirely the work of Andreas Heger and contributors.
+The most prevalent examples of pysam objects are the ``read`` and ``master`` arguments when defining an ``rule``. The read is of type ``AlignedSegment`` and master is of type ``AlignmentFile``. Both of these are pysam classes. Their documentation is reproduced here for reference. Pysam is entirely the work of Andreas Heger and contributors.
 
-**Please Note**: Users of parabam don't need to know a great deal about pysam classes (most of this is taken care of behind the scenes), but when writing engines it will help to know the different variables and functions that you may reference with the ``read`` and ``master`` arguments.
+**Please Note**: Users of parabam don't need to know a great deal about pysam classes (most of this is taken care of behind the scenes), but when writing rules it will help to know the different variables and functions that you may reference with the ``read`` and ``master`` arguments.
 
 .. _read-section-label:
 
