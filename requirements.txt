@@ -3,7 +3,7 @@ MarkupSafe==0.23
 Pygments==2.0.1
 Sphinx==1.2.3
 docutils==0.12
-parabam==0.1.2dev
+parabam==2.2
 pysam==0.8.1
 sphinxcontrib-napoleon==0.2.8
 wsgiref==0.1.2
