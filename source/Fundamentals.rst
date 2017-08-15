@@ -6,16 +6,16 @@ Here are some fundamental concepts relating to parabam that will make interactin
 The ``subset`` and ``stat`` operations
 ++++++++++++++++++++++++++++++++++++++
 
-Currently parabam allows you to conduct to separate "operations". These are ``subset`` and ``stat``.
+Currently parabam allows you to conduct two separate "operations". These are ``subset`` and ``stat``.
 
-The :doc:`subset <Subset>` operation allows the user to create BAMs containing a specific subset of reads from within a given BAM file. For example, a subset BAM containing all of the unmapped reads in the file, or all the read which contain a certain sequence.
+The :doc:`subset <Subset>` operation allows the user to create BAMs containing a specific subset of reads from within a given BAM file. For example, a subset BAM containing all of the unmapped reads in the file, or all the reads which contain a certain sequence.
 
-The :doc:`stat <Subset>` operation allows the user to collect data concerning the reads in a given BAM file. These data are collected and output in a .csv file at the end of operation. Data can be collected as an int, float or numpy array. For instance, the user may wish to collect the amount of reads in a file that contain a specific sequence, or statistics like the average insert size of a BAM file.
+The :doc:`stat <Subset>` operation allows the user to collect data concerning the reads in a given BAM file. These data are collected and output in a .csv file at the end of operation. Data can be collected as an int, float or `NumPy <http://www.numpy.org>`_ array. For instance, the user may wish to collect the amount of reads in a file that contain a specific sequence, or statistics like the average insert size of a BAM file.
 
 Ways of interacting with parabam
 ++++++++++++++++++++++++++++++++
 
-There are several ways to interact with parabam. The most direct way is to write a short instructions script in python and then run this on the command line. For details on how to write instructions files for the various parabam operations consult the :doc:`subset <Subset>` and :doc:`stat <Stat>` sections.
+There are several ways to interact with parabam. The most direct way is to write a short instruction script in Python and then run this on the command line. For details on how to write instructions files for the various parabam operations consult the :doc:`subset <Subset>` and :doc:`stat <Stat>` sections.
 
 Users may also incorporate parabam into their own programs. This is as simple as importing the relevant Interface class for your intended operation (subset or stat) and then providing the relevant arguments.
 
@@ -24,25 +24,25 @@ Examples for both of these methods may be found on the :doc:`subset examples <Su
 Engines and constants
 +++++++++++++++++++++
 
-parabam works by applying an ``rule`` (a user defined function) to every read in the BAM file. Engines are simple functions that only take three arguments. These are:
+parabam works by applying a ``rule`` (a user defined function) to every read in the BAM file. Engines are simple functions that only take three arguments. These are:
 
 * :ref:`read <read-section-label>` - A sequencing read. This is an object of type pysam.AlignedSegment
 * constants - A set of user defined constants. This is a simple python ``dict``.
-* :ref:`master <master-section-label>` - An object which represents the sample BAM file from which the read originated file. This is an object of type pysam.AlignmentFile
+* :ref:`master <master-section-label>` - An object which represents the sample BAM file from which the read originated. This is an object of type pysam.AlignmentFile
 
-For example which show in detail how to create rules for both subset and stat operations, see the :doc:`subset <Subset>` and :doc:`stat <Stat>` sections.
+For examples which show in detail how to create rules for both subset and stat operations, see the :doc:`subset <Subset>` and :doc:`stat <Stat>` sections.
 
 Output Files
 ++++++++++++
 
-Certain invocations of parabam will create many output files. Particularly runs using multiple statistics or multiple  
+Certain invocations of parabam will create many output files, particularly runs using multiple statistics.
 
 Pysam classes: read and master
 ++++++++++++++++++++++++++++++
 
 parabam uses the package ``pysam`` to process BAM files. As such the objects we interact with are pysam classes.
 
-The most prevalent examples of pysam objects are the ``read`` and ``master`` arguments when defining an ``rule``. The read is of type ``AlignedSegment`` and master is of type ``AlignmentFile``. Both of these are pysam classes. Their documentation is reproduced here for reference. Pysam is entirely the work of Andreas Heger and contributors.
+The most prevalent examples of pysam objects are the ``read`` and ``master`` arguments when defining a ``rule``. The read is of type ``AlignedSegment`` and master is of type ``AlignmentFile``. Both of these are pysam classes. Their documentation is reproduced here for reference. Pysam is entirely the work of Andreas Heger and contributors.
 
 **Please Note**: Users of parabam don't need to know a great deal about pysam classes (most of this is taken care of behind the scenes), but when writing rules it will help to know the different variables and functions that you may reference with the ``read`` and ``master`` arguments.
 
