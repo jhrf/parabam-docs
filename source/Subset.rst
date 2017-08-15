@@ -4,19 +4,19 @@ The `subset` interface
 What is the subset interface for?
 +++++++++++++++++++++++++++++++++
 
-The `subset` operation allows the user to create BAMs containing a specific subset of reads from within a given BAM file. For example, a subset BAM containing all of the unmapped reads in the file, or all the read which contain a certain sequence.
+The `subset` operation allows the user to create BAMs containing a specific subset of reads from within a given BAM file. For example, a subset BAM containing all of the unmapped reads in the file, or all the reads which contain a certain sequence.
 
 In this chapter we detail the process you must follow in order to run the subset operation.
 
 Producing a single subset
 +++++++++++++++++++++++++
 
-With parabam it easy to create BAM files containing a subset of reads from a larger BAM file. In this section we will explore how to create a single subset with parabam. With single subsets there is only one criterion by which reads are stored. This makes for simple code, but if you want to create multiple subset you should read the section detailing :ref:`multiple subsets <multiple-section-ref>`.
+With parabam it is easy to create BAM files containing a subset of reads from a larger BAM file. In this section we will explore how to create a single subset with parabam. With single subsets there is only one criterion by which reads are stored. This makes for simple code, but if you want to create multiple subsets you should read the section detailing :ref:`multiple subsets <multiple-section-ref>`.
 
 From the command line
 ---------------------
 
-Here is a run though illustrating how we would create a parabam run that collects unmapped reads from a file.
+Here is a run-though illustrating how we would create a parabam run that collects unmapped reads from a file.
 
 In order to use the subset interface from the command line we first navigate to a directory where we will conduct our analysis.
 
@@ -39,7 +39,7 @@ Now we edit the file we just created - *get_unmapped_reads.py* - to include the 
 			return True
 		return False
 
-By returning true we tell parabam to store the read in its subset.
+By returning ``True`` we tell parabam to store the read in its subset.
 
 We would then invoke this instruction from the command line as follows:
 
@@ -60,7 +60,7 @@ If you need to know what any of the arguments to the subset operation are just t
 Producing multiple subsets
 ++++++++++++++++++++++++++
 
-Sometimes we may wish to store multiple subsets from the same BAM file. We can do this both on the command line or by invoking parabam programatically via python.
+Sometimes we may wish to store multiple subsets from the same BAM file. We can do this both on the command line or by invoking parabam programatically via Python.
 
 From the command line
 ---------------------
@@ -90,9 +90,9 @@ We then need to write the code that allows us to create the subsets. It's more i
 
 		return belongs
 
-The above code block sees us introduce the function "get_subset_types". Notice how first we define the subset groups as a list of strings. These strings can be anything you want, but it make sense to label them appropriately. 
+The above code block sees us introduce the function ``get_subset_types``. Notice how first we define the subset groups as a list of strings. These strings can be anything you want, but it make sense to label them appropriately. 
 
-Then, in the rule we return a list of subsets to which the read belongs. For example, if a read returns True for both ``is_qcfail`` and ``is_secondary`` it will be added to both files.
+Then, in the rule, we return a list of subsets to which the read belongs. For example, if a read returns ``True`` for both ``is_qcfail`` and ``is_secondary`` it will be added to both files.
 
 We can then run parabam from the command line like so, imagining that we have a file `human_sample_001.bam`:
 
