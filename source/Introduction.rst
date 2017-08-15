@@ -38,38 +38,38 @@ Now locate the BAM file you wish to run parabam analysis on. Then type the follo
 
 	parabam subset -v2 -i instructions -b /path/to/bam/file_name.bam
 
-After a while (depending on how large your input BAM file was) parabam will be finished and you will be left with a at `<file_name>_subset.bam`.
+After a while (depending on how large your input BAM file was) parabam will be finished and you will be left with a result in `<file_name>_subset.bam`.
 
-Congratulations you just ran parabam subset. Read on to find out more.
+Congratulations - you just ran parabam subset. Read on to find out more.
 
 Introduction
 ============
 
 So, you've got this far through the documentation which means you are at least reasonably curious about parabam. Great! 
 
-The goal of parabam is to allow the user to inspect large BAM files in a timely manner whilst making the most of thier computational resources and without having to write too much code. The most direct way to use parabam is via the command line, but it can also be invokved programaticaly via interface classes and also support full incorporation via OOP inheritance.
+The goal of parabam is to allow the user to inspect large BAM files in a timely manner whilst making the most of their computational resources and without having to write too much code. The most direct way to use parabam is via the command line, but it can also be invoked programaticaly via interface classes, and also support full incorporation via OOP inheritance.
 
-If any of the words in the pragraph above don't make sense: *don't worry*. Parabam is easy to run for beginniners. All you need is to know a little bit of unix (how to make and change directories) and a little bit of python. Just follow the instructions and you'll be conducting hi-throughput analysis in no time. If you have any questions, feel free to email me.
+If any of the words in the pragraph above don't make sense: *don't worry*. Parabam is easy to run for beginniners. All you need is to know a little bit of Unix (how to make and change directories) and a little bit of Python. Just follow the instructions and you'll be conducting high-throughput analysis in no time. If you have any questions, feel free to email me.
 
-Alternatively, if you understood every word of the above and want to get more indepth with parabam then pay close attention to the programatic and inheritence based interfaces.
+Alternatively, if you understood every word of the above and want to get more in-depth with parabam then pay close attention to the programmatic and inheritance based interfaces.
 
 Installing parabam
 ++++++++++++++++++
 
 First, we have to get parabam running on your computer. This section will guide you through installing parabam.
 
-Currently, parabam is only available to POSIX compliment systems (Linux, Mac OSX, etc) and not Windows.
+Currently, parabam is only available to POSIX compliant systems (Linux, Mac OSX, etc) and not Windows.
 
 The easy way
 ------------
 
-The easiset way to install parabam is as follows:
+The easiest way to install parabam is as follows:
 
 .. code-block:: shell
 
    sudo pip install parabam
 
-This will also place an exectuable in a location on your path. So after typing this command you should be able to do the following:
+This will also place an executable in a location on your path. So after typing this command you should be able to do the following:
 
 .. code-block:: shell
 
@@ -93,8 +93,8 @@ If typing `parbam` into your terminal yields the result above, you have succesfu
 The manual way
 --------------
 
-Some users may wish to install from source. The source may be downloaded from here (link to path).
-This part of the documents aren't written yet, but if you want to do this you probably know how to do it anyway.
+Some users may wish to install from source. The source may be [downloaded from here](https://github.com/jhrf/parabam).
+This part of the documentation isn't written yet, but if you want to do this you probably know how to do it anyway.
 
 The precompiled way
 -------------------
@@ -111,5 +111,5 @@ It should work out of the box if you picked the right binary.
 Running parabam on a cluster
 ++++++++++++++++++++++++++++
 
-Some users may wish to run parabam on a high powered computing service like a cluster. On systems such as these you may not have root access, so you may not be able to install python directories. In these cases you may wish to use parabam within a virtualenv.
+Some users may wish to run parabam on a high powered computing service like a cluster. On systems such as these you may not have root access, so you may not be able to install to the Python system directories. In these cases you may wish to use parabam within a [virtualenv](https://docs.python.org/3/tutorial/venv.html).
 
