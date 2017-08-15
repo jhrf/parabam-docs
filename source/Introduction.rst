@@ -93,7 +93,7 @@ If typing `parbam` into your terminal yields the result above, you have succesfu
 The manual way
 --------------
 
-Some users may wish to install from source. The source may be [downloaded from here](https://github.com/jhrf/parabam).
+Some users may wish to install from source. The source may be `downloaded from here <https://github.com/jhrf/parabam>`_.
 This part of the documentation isn't written yet, but if you want to do this you probably know how to do it anyway.
 
 The precompiled way
@@ -111,5 +111,5 @@ It should work out of the box if you picked the right binary.
 Running parabam on a cluster
 ++++++++++++++++++++++++++++
 
-Some users may wish to run parabam on a high powered computing service like a cluster. On systems such as these you may not have root access, so you may not be able to install to the Python system directories. In these cases you may wish to use parabam within a [virtualenv](https://docs.python.org/3/tutorial/venv.html).
+Some users may wish to run parabam on a high powered computing service like a cluster. On systems such as these you may not have root access, so you may not be able to install to the Python system directories. In these cases you may wish to use parabam within a `virtualenv <https://docs.python.org/3/tutorial/venv.html>`_.
 
