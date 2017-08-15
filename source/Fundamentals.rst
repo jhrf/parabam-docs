@@ -1,4 +1,4 @@
-Fundamentals of parabam 
+Fundamentals of parabam
 ***********************
 
 Here are some fundamental concepts relating to parabam that will make interacting with parabam easier.
